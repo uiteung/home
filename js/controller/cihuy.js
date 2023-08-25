@@ -12,4 +12,5 @@ export function magiclink(event){
     window.location.href = newurlrtm
 }
 
+console(token ,newurlrtm);
 CihuyId("rtm").addEventListener("click", magiclink)
