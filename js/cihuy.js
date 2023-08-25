@@ -14,7 +14,7 @@ function redirectRTM(token) {
 
 CihuyDomReady(() => {
   const token = CihuyGetCookie("login");
-  CihuyAddClickListener("rtm", (event) => {
+  CihuyClickListenenr("rtm", (event) => {
     event.preventDefault();
     redirectRTM(token);
   });
