@@ -3,7 +3,7 @@ import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
 import { CihuyDomReady } from "https://c-craftjs.github.io/table/table.js";
 
 let rtmlink = CihuyId("rtm");
-// let token = CihuyGetCookie("login");
+let token = CihuyGetCookie("login");
 
 // CihuyDomReady(() => {
 //   rtmlink.addEventListener("click", () => {
