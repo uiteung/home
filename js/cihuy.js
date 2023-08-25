@@ -13,8 +13,8 @@ CihuyDomReady(() => {
     event.preventDefault();
 
     const url = new URL("https://rtm.ulbi.ac.id/index.php/auth");
-    url.searchParams.set("uuid", token);
+    url.searchParams.set("uuid", encodeURIComponent(token));
 
-    window.location.href = url.href;
+    rtmlink.href = url;
   });
 });
