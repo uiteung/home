@@ -22,3 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+export function handleRtmClick() {
+  event.preventDefault();
+
+  if (token) {
+    let newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${token}`;
+    window.location.assign(newUrl);
+  } else {
+    console.log("Token tidak ditemukan dalam cookie.");
+  }
+}
