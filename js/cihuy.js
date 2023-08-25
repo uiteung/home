@@ -1,21 +1,21 @@
 import {
   CihuyId,
-  CihuyLinkClick,
+  CihuyClickListenenr,
 } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
 import { CihuyDomReady } from "https://c-craftjs.github.io/table/table.js";
 
+function redirectRTM(token) {
+  const newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${encodeURIComponent(
+    token
+  )}`;
+  window.location.assign(newUrl);
+}
+
 CihuyDomReady(() => {
-  const rtmlink = CihuyId("rtm");
   const token = CihuyGetCookie("login");
-
-  rtmlink.addEventListener("click", (event) => {
+  CihuyAddClickListener("rtm", (event) => {
     event.preventDefault();
-
-    const newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${encodeURIComponent(
-      token
-    )}`;
-
-    window.location.assign(newUrl); // Mengarahkan pengguna ke URL baru
+    redirectRTM(token);
   });
 });
