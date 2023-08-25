@@ -1,16 +1,17 @@
+import {
+  CihuyId,
+  CihuyLinkClick,
+} from "https://c-craftjs.github.io/element/element.js";
+import { CihuyGetCookie } from "https://c-craftjs.github.io/link/link.js";
+import { CihuyDomReady } from "https://c-craftjs.github.io/table/table.js";
 
-import {CihuyId} from "https://c-craftjs.github.io/element/element.js";
-import {CihuyGetCookie} from "https://c-craftjs.github.io/link/link.js"
+const token = CihuyGetCookie("login");
 
+CihuyDomReady(() => {
+  const rtmlink = CihuyId("rtm");
+  const uuid = token;
 
-export function magiclink(event){
-    event.preventDefault();
-
-    const token = CihuyGetCookie("login");
-    const newurlrtm = "https://rtm.ulbi.ac.id?uuid=" +token;
-
-    window.location.href = newurlrtm
-}
-
-console(token ,newurlrtm);
-CihuyId("rtm").addEventListener("click", magiclink)
+  rtmlink.addEventListener("click", (event) => {
+    CihuyLinkClick(event, `https://rtm.ulbi.ac.id/index.php/auth?uuid=${uuid}`);
+  });
+});
