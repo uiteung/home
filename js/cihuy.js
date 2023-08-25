@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-export function handleRtmClick() {
+export function handleRtmClick(event) {
   event.preventDefault();
 
   if (token) {
