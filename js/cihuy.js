@@ -12,9 +12,10 @@ CihuyDomReady(() => {
   rtmlink.addEventListener("click", (event) => {
     event.preventDefault();
 
-    const url = new URL("https://rtm.ulbi.ac.id/index.php/auth");
-    url.searchParams.set("uuid", encodeURIComponent(token));
+    const newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${encodeURIComponent(
+      token
+    )}`;
 
-    rtmlink.href = url;
+    window.location.assign(newUrl); // Mengarahkan pengguna ke URL baru
   });
 });
