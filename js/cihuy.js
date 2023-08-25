@@ -10,6 +10,6 @@ CihuyDomReady(() => {
     // event.preventDefault();
     const newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${token}`;
 
-    window.location.href(newUrl);
+    window.location.href = newUrl;
   });
 });
