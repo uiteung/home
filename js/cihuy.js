@@ -2,7 +2,7 @@ import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
 document.addEventListener("DOMContentLoaded", function () {
   // Dapatkan elemen dengan ID "rtm"
-  let rtmLink = CihuyId("rtm");
+  let rtmLink = document.getElementById("rtm");
 
   // Dapatkan nilai cookie "login"
   let token = CihuyGetCookie("login");
