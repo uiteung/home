@@ -1,6 +1,5 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
-
 document.addEventListener("DOMContentLoaded", function () {
   // Dapatkan elemen dengan ID "rtm"
   let rtmLink = CihuyId("rtm");
@@ -24,13 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// export function handleRtmClick(event) {
-//   event.preventDefault();
+export function handleRtmClick(event) {
+  event.preventDefault();
 
-//   if (token) {
-//     let newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${token}`;
-//     window.location.assign(newUrl);
-//   } else {
-//     console.log("Token tidak ditemukan dalam cookie.");
-//   }
-// }
+  if (token) {
+    let newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${token}`;
+    window.location.assign(newUrl);
+  } else {
+    console.log("Token tidak ditemukan dalam cookie.");
+  }
+}
