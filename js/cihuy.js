@@ -1,6 +1,7 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
 import { CihuyPostHeaders } from "https://c-craftjs.github.io/api/api.js";
+import { CihuyQuerySelector } from "https://c-craftjs.github.io/element/element.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // Dapatkan elemen dengan ID "rtm"
@@ -37,11 +38,20 @@ export function handleRtmClick(event) {
 }
 
 //membuat get user
-const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
-let token = CihuyGetCookie("login");
+const cardElement = CihuyQuerySelector(".simpelbi");
 
-CihuyPostHeaders(apiUrlMenu, token)
-  .then((result) => {
+// Tambahkan event listener untuk mendengarkan klik pada card
+cardElement.addEventListener("click", async (event) => {
+  event.preventDefault();
+
+  // Gantikan dengan token yang sesuai
+  const token = CihuyGetCookie("login");
+
+  const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
+
+  try {
+    // Lakukan POST request dan tangani respons
+    const result = await CihuyPostHeaders(apiUrlMenu, token);
     console.log(result);
 
     // Parse respons JSON
@@ -75,7 +85,7 @@ CihuyPostHeaders(apiUrlMenu, token)
 
     // Redirect pengguna ke halaman yang sesuai
     window.location.href = baseUrl + destinationUrl;
-  })
-  .catch((error) => {
-    console.log("Error:", error);
-  });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+});
