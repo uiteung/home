@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ) {
           targetPage = "maaf.html";
         } else if (dataUrl === "/admins") {
-          targetPage = "dashboard-admin.html";
+          targetPage = "dashboard.html";
         } else if (dataUrl === "/prodi") {
           targetPage = "dashboard-prodi.html";
         } else if (dataUrl === "/fakultas") {
