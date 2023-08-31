@@ -38,7 +38,6 @@ export function handleRtmClick(event) {
 }
 
 //membuat get user
-
 document.addEventListener("DOMContentLoaded", () => {
   const simpelbiCard = document.getElementById("simpelbiCard");
 
@@ -46,38 +45,49 @@ document.addEventListener("DOMContentLoaded", () => {
     simpelbiCard.addEventListener("click", async (event) => {
       event.preventDefault();
 
-      const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
-      const baseUrl = "https://euis.ulbi.ac.id";
+      const postApiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
 
       try {
         let token = CihuyGetCookie("login");
-        const postResult = await CihuyPostHeaders(apiUrlMenu, token);
-        const postData = await postResult.json();
-        const dataUrl = postData.data;
 
-        let userRole = "";
-        if (dataUrl === "/admins") {
-          userRole = "admin";
-        } else if (dataUrl === "/fakultas") {
-          userRole = "fakultas";
+        // Lakukan permintaan POST
+        const postResult = await CihuyPostHeaders(postApiUrlMenu, token);
+
+        // Parse respons JSON dari permintaan POST
+        const responseData = JSON.parse(postResult);
+
+        // Dapatkan data URL dari respons
+        const dataUrl = responseData.data;
+
+        // Tentukan halaman tujuan berdasarkan data URL
+        let targetPage = "";
+        if (
+          responseData.code === 400 &&
+          responseData.success === false &&
+          responseData.status === "Data user level tidak ditemukan"
+        ) {
+          targetPage = "maaf.html";
+        } else if (dataUrl === "/admins") {
+          targetPage = "dashboard-admin.html";
         } else if (dataUrl === "/prodi") {
-          userRole = "prodi";
-        } else if (dataUrl === "/auditors") {
-          userRole = "auditor";
+          targetPage = "dashboard-prodi.html";
+        } else if (dataUrl === "/fakultas") {
+          targetPage = "dashboard-fakultas.html";
+        } else if (dataUrl === "/auditor") {
+          targetPage = "dashboard-auditor.html";
         } else {
           console.error("URL tidak sesuai");
           return;
         }
 
-        redirectToDashboard(baseUrl, dataUrl, userRole);
+        // Konstruksi URL akhir
+        const finalUrl = `https://euis.ulbi.ac.id/simpelbi${dataUrl}/${targetPage}`;
+
+        // Arahkan pengguna ke URL akhir
+        window.location.href = finalUrl;
       } catch (error) {
         console.error("Error:", error);
       }
     });
   }
 });
-
-function redirectToDashboard(baseUrl, dataUrl, userRole) {
-  const finalUrl = `${baseUrl}/simpelbi${dataUrl}/${userRole}`;
-  window.location.href = finalUrl;
-}
