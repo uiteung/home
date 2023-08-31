@@ -2,6 +2,7 @@ import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
 import { CihuyPostHeaders } from "https://c-craftjs.github.io/api/api.js";
 import { CihuyQuerySelector } from "https://c-craftjs.github.io/element/element.js";
+import { token } from "./controller/cookies";
 
 document.addEventListener("DOMContentLoaded", function () {
   // Dapatkan elemen dengan ID "rtm"
@@ -64,6 +65,8 @@ function redirectToDashboard(baseUrl, dataUrl) {
 const simpelbiCard = CihuyId("simpelbiCard");
 
 if (simpelbiCard) {
+  let token = CihuyGetCookie("login");
+
   simpelbiCard.addEventListener("click", async (event) => {
     event.preventDefault();
 
@@ -71,9 +74,7 @@ if (simpelbiCard) {
     const baseUrl = "https://euis.ulbi.ac.id";
 
     try {
-      const postData = {}; // Isi sesuai dengan data yang ingin Anda kirimkan
-
-      const result = await CihuyPostHeaders(apiUrlMenu, postData);
+      const result = await CihuyPostHeaders(apiUrlMenu, token);
       const dataUrl = result.data;
 
       redirectToDashboard(baseUrl, dataUrl);
