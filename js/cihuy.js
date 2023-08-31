@@ -59,18 +59,20 @@ function redirectToDashboard(baseUrl, dataUrl) {
   }
 
   // Redirect pengguna ke halaman yang sesuai
+  console.log("Redirecting to:", baseUrl + destinationUrl);
+
   window.location.href = baseUrl + destinationUrl;
 }
 
 const simpelbiCard = CihuyId("simpelbiCard");
-let token = CihuyGetCookie("login");
+token = CihuyGetCookie("login");
 
 if (simpelbiCard) {
   simpelbiCard.addEventListener("click", async (event) => {
     event.preventDefault();
 
     const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
-    const baseUrl = "https://euis.ulbi.ac.id";
+    const baseUrl = "https://euis.ulbi.ac.id/simpelbi";
 
     try {
       const result = await CihuyPostHeaders(apiUrlMenu, token);
