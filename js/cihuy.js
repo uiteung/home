@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (dataUrl === "/admins") {
           targetPage = "dashboard.html";
         } else if (dataUrl === "/prodi") {
-          targetPage = "dashboard-prodi.html";
+          targetPage = "adashboard-prodi.html";
         } else if (dataUrl === "/fakultas") {
           targetPage = "dashboard-fakultas.html";
         } else if (dataUrl === "/auditor") {
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Konstruksi URL akhir
-        const finalUrl = `https://euis.ulbi.ac.id/simpelbi${dataUrl}/${targetPage}`;
+        const finalUrl = `https://euis.ulbi.ac.id/simpelbi/app/${dataUrl}/${targetPage}`;
 
         // Arahkan pengguna ke URL akhir
         window.location.href = finalUrl;
