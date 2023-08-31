@@ -63,10 +63,9 @@ function redirectToDashboard(baseUrl, dataUrl) {
 }
 
 const simpelbiCard = CihuyId("simpelbiCard");
+let token = CihuyGetCookie("login");
 
 if (simpelbiCard) {
-  let token = CihuyGetCookie("login");
-
   simpelbiCard.addEventListener("click", async (event) => {
     event.preventDefault();
 
@@ -76,6 +75,7 @@ if (simpelbiCard) {
     try {
       const result = await CihuyPostHeaders(apiUrlMenu, token);
       const dataUrl = result.data;
+      console.log("Data URL from API:", dataUrl);
 
       redirectToDashboard(baseUrl, dataUrl);
     } catch (error) {
