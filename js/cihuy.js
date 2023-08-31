@@ -65,7 +65,6 @@ function redirectToDashboard(baseUrl, dataUrl) {
 }
 
 const simpelbiCard = CihuyId("simpelbiCard");
-let token = CihuyGetCookie("login");
 
 if (simpelbiCard) {
   simpelbiCard.addEventListener("click", async (event) => {
@@ -75,6 +74,7 @@ if (simpelbiCard) {
     const baseUrl = "https://euis.ulbi.ac.id";
 
     try {
+      let token = CihuyGetCookie("login");
       const result = await CihuyPostHeaders(apiUrlMenu, token);
       const dataUrl = result.data;
       console.log("Data URL from API:", dataUrl);
