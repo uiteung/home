@@ -65,7 +65,7 @@ function redirectToDashboard(baseUrl, dataUrl) {
 }
 
 const simpelbiCard = CihuyId("simpelbiCard");
-token = CihuyGetCookie("login");
+let token = CihuyGetCookie("login");
 
 if (simpelbiCard) {
   simpelbiCard.addEventListener("click", async (event) => {
@@ -79,7 +79,6 @@ if (simpelbiCard) {
       const dataUrl = result.data;
       console.log("Data URL from API:", dataUrl);
 
-      // Determine user role based on dataUrl
       let userRole = "";
       if (dataUrl === "/admins") {
         userRole = "admin";
