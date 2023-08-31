@@ -52,8 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         let token = CihuyGetCookie("login");
-        const result = await CihuyPostHeaders(apiUrlMenu, token);
-        const dataUrl = result.data;
+        const postResult = await CihuyPostHeaders(apiUrlMenu, token);
+        const postData = await postResult.json();
+        const dataUrl = postData.data;
 
         let userRole = "";
         if (dataUrl === "/admins") {
@@ -76,3 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+function redirectToDashboard(baseUrl, dataUrl, userRole) {
+  const finalUrl = `${baseUrl}/simpelbi${dataUrl}/${userRole}`;
+  window.location.href = finalUrl;
+}
