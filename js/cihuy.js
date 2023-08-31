@@ -61,7 +61,7 @@ function redirectToDashboard(baseUrl, dataUrl) {
   // Redirect pengguna ke halaman yang sesuai
   console.log("Redirecting to:", baseUrl + destinationUrl);
 
-  window.location.href = baseUrl + destinationUrl;
+  window.location.href = baseUrl + dataUrl + destinationUrl;
 }
 
 const simpelbiCard = CihuyId("simpelbiCard");
@@ -72,14 +72,29 @@ if (simpelbiCard) {
     event.preventDefault();
 
     const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
-    const baseUrl = "https://euis.ulbi.ac.id/simpelbi";
+    const baseUrl = "https://euis.ulbi.ac.id";
 
     try {
       const result = await CihuyPostHeaders(apiUrlMenu, token);
       const dataUrl = result.data;
       console.log("Data URL from API:", dataUrl);
 
-      redirectToDashboard(baseUrl, dataUrl);
+      // Determine user role based on dataUrl
+      let userRole = "";
+      if (dataUrl === "/admins") {
+        userRole = "admin";
+      } else if (dataUrl === "/fakultas") {
+        userRole = "fakultas";
+      } else if (dataUrl === "/prodi") {
+        userRole = "prodi";
+      } else if (dataUrl === "/auditors") {
+        userRole = "auditor";
+      } else {
+        console.error("URL tidak sesuai");
+        return;
+      }
+
+      redirectToDashboard(baseUrl, dataUrl, userRole);
     } catch (error) {
       console.error("Error:", error);
     }
