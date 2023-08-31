@@ -40,28 +40,8 @@ export function handleRtmClick(event) {
 
 //membuat get user
 
-function redirectToDashboard(baseUrl, dataUrl) {
-  // Menentukan URL tujuan berdasarkan data URL
-  let destinationUrl = "";
-
-  if (dataUrl === "/admins") {
-    destinationUrl = "/dashboard.html";
-  } else if (dataUrl === "/fakultas") {
-    destinationUrl = "/dashboard-fakultas.html";
-  } else if (dataUrl === "/auditors") {
-    destinationUrl = "/dashboard-auditor.html";
-  } else if (dataUrl === "/prodi") {
-    destinationUrl = "/dashboard-prodi.html";
-  } else {
-    // URL tidak sesuai, tangani sesuai kebutuhan
-    console.error("URL tidak sesuai");
-    return;
-  }
-
-  // Redirect pengguna ke halaman yang sesuai
-  console.log("Redirecting to:", baseUrl + destinationUrl);
-
-  window.location.href = baseUrl + "/simpelbi/" + role + destinationUrl;
+function redirectToDashboard(url) {
+  window.location.href = url;
 }
 
 const simpelbiCard = CihuyId("simpelbiCard");
@@ -81,7 +61,24 @@ if (simpelbiCard) {
 
       const role = data.replace("/", ""); // Menghapus karakter "/" di awal string
 
-      redirectToDashboard(baseUrl, role);
+      let destinationUrl = "";
+      if (role === "admins") {
+        destinationUrl = "/dashboard.html";
+      } else if (role === "fakultas") {
+        destinationUrl = "/dashboard-fakultas.html";
+      } else if (role === "prodi") {
+        destinationUrl = "/dashboard-prodi.html";
+      } else if (role === "auditors") {
+        destinationUrl = "/dashboard-auditor.html";
+      } else {
+        console.error("Role tidak sesuai");
+        return;
+      }
+
+      const fullUrl = `${baseUrl}/simpelbi/${role}${destinationUrl}`;
+      console.log("Full URL:", fullUrl);
+
+      redirectToDashboard(fullUrl);
     } catch (error) {
       console.error("Error:", error);
     }
