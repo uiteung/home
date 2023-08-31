@@ -2,7 +2,6 @@ import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
 import { CihuyPostHeaders } from "https://c-craftjs.github.io/api/api.js";
 import { CihuyQuerySelector } from "https://c-craftjs.github.io/element/element.js";
-import { token } from "./controller/cookies";
 
 document.addEventListener("DOMContentLoaded", function () {
   // Dapatkan elemen dengan ID "rtm"
