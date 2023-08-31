@@ -1,5 +1,7 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
+import { CihuyPostHeaders } from "https://c-craftjs.github.io/api/api.js";
+
 document.addEventListener("DOMContentLoaded", function () {
   // Dapatkan elemen dengan ID "rtm"
   let rtmLink = document.getElementById("rtm");
@@ -33,3 +35,45 @@ export function handleRtmClick(event) {
     console.log("Token tidak ditemukan dalam cookie.");
   }
 }
+
+//membuat get user
+const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
+CihuyPostHeaders(apiUrlMenu, token)
+  .then((result) => {
+    console.log(result);
+
+    // Parse respons JSON
+    const response = JSON.parse(result);
+
+    // Dapatkan data URL dari respons
+    const dataUrl = response.data;
+
+    // URL dasar situs Anda
+    const baseUrl = "https://alamat-situs-anda.com";
+
+    // Gabungkan URL data dengan URL dasar
+    const fullUrl = baseUrl + dataUrl;
+
+    // Menentukan URL tujuan berdasarkan data URL
+    let destinationUrl = "";
+
+    if (dataUrl === "/admins") {
+      destinationUrl = "/Dashboard.html";
+    } else if (dataUrl === "/fakultas") {
+      destinationUrl = "/DashboardFakultas.html";
+    } else if (dataUrl === "/auditors") {
+      destinationUrl = "/DashboardAuditor.html";
+    } else if (dataUrl === "/prodi") {
+      destinationUrl = "/DashboardProdi.html";
+    } else {
+      // URL tidak sesuai, tangani sesuai kebutuhan
+      console.error("URL tidak sesuai");
+      return;
+    }
+
+    // Redirect pengguna ke halaman yang sesuai
+    window.location.href = baseUrl + destinationUrl;
+  })
+  .catch((error) => {
+    console.log("Error:", error);
+  });
