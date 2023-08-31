@@ -61,7 +61,7 @@ function redirectToDashboard(baseUrl, dataUrl) {
   // Redirect pengguna ke halaman yang sesuai
   console.log("Redirecting to:", baseUrl + destinationUrl);
 
-  window.location.href = baseUrl + dataUrl + destinationUrl;
+  window.location.href = baseUrl + "/simpelbi/" + role + destinationUrl;
 }
 
 const simpelbiCard = CihuyId("simpelbiCard");
@@ -71,29 +71,17 @@ if (simpelbiCard) {
     event.preventDefault();
 
     const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
-    const baseUrl = "https://euis.ulbi.ac.id";
+    const baseUrl = "https://euis.ulbi.ac.id"; // Ganti dengan alamat dasar situs Anda
 
     try {
-      let token = CihuyGetCookie("login");
+      const token = CihuyGetCookie("login");
       const result = await CihuyPostHeaders(apiUrlMenu, token);
-      const dataUrl = result.data;
-      console.log("Data URL from API:", dataUrl);
+      const data = JSON.parse(result).data;
+      console.log("Data from API:", data);
 
-      let userRole = "";
-      if (dataUrl === "/admins") {
-        userRole = "admin";
-      } else if (dataUrl === "/fakultas") {
-        userRole = "fakultas";
-      } else if (dataUrl === "/prodi") {
-        userRole = "prodi";
-      } else if (dataUrl === "/auditors") {
-        userRole = "auditor";
-      } else {
-        console.error("URL tidak sesuai");
-        return;
-      }
+      const role = data.replace("/", ""); // Menghapus karakter "/" di awal string
 
-      redirectToDashboard(baseUrl, dataUrl, userRole);
+      redirectToDashboard(baseUrl, role);
     } catch (error) {
       console.error("Error:", error);
     }
