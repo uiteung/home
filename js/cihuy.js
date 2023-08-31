@@ -61,9 +61,8 @@ function redirectToDashboard(baseUrl, dataUrl) {
   window.location.href = baseUrl + destinationUrl;
 }
 
-const simpelbiCard = CihuyQuerySelector(
-  ".portfolio-item a[href='https://euis.ulbi.ac.id/simpelbi']"
-);
+const simpelbiCard = CihuyId("simpelbiCard");
+
 if (simpelbiCard) {
   simpelbiCard.addEventListener("click", async (event) => {
     event.preventDefault();
