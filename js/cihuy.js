@@ -38,54 +38,48 @@ export function handleRtmClick(event) {
 }
 
 //membuat get user
-const cardElement = CihuyQuerySelector(".simpelbi");
 
-// Tambahkan event listener untuk mendengarkan klik pada card
-cardElement.addEventListener("click", async (event) => {
-  event.preventDefault();
+function redirectToDashboard(baseUrl, dataUrl) {
+  // Menentukan URL tujuan berdasarkan data URL
+  let destinationUrl = "";
 
-  // Gantikan dengan token yang sesuai
-  const token = CihuyGetCookie("login");
-
-  const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
-
-  try {
-    // Lakukan POST request dan tangani respons
-    const result = await CihuyPostHeaders(apiUrlMenu, token);
-    console.log(result);
-
-    // Parse respons JSON
-    const response = JSON.parse(result);
-
-    // Dapatkan data URL dari respons
-    const dataUrl = response.data;
-
-    // URL dasar situs Anda
-    const baseUrl = "https://alamat-situs-anda.com";
-
-    // Gabungkan URL data dengan URL dasar
-    const fullUrl = baseUrl + dataUrl;
-
-    // Menentukan URL tujuan berdasarkan data URL
-    let destinationUrl = "";
-
-    if (dataUrl === "/admins") {
-      destinationUrl = "/Dashboard.html";
-    } else if (dataUrl === "/fakultas") {
-      destinationUrl = "/DashboardFakultas.html";
-    } else if (dataUrl === "/auditors") {
-      destinationUrl = "/DashboardAuditor.html";
-    } else if (dataUrl === "/prodi") {
-      destinationUrl = "/DashboardProdi.html";
-    } else {
-      // URL tidak sesuai, tangani sesuai kebutuhan
-      console.error("URL tidak sesuai");
-      return;
-    }
-
-    // Redirect pengguna ke halaman yang sesuai
-    window.location.href = baseUrl + destinationUrl;
-  } catch (error) {
-    console.error("Error:", error);
+  if (dataUrl === "/admins") {
+    destinationUrl = "/dashboard.html";
+  } else if (dataUrl === "/fakultas") {
+    destinationUrl = "/dashboard-fakultas.html";
+  } else if (dataUrl === "/auditors") {
+    destinationUrl = "/dashboard-auditor.html";
+  } else if (dataUrl === "/prodi") {
+    destinationUrl = "/dashboard-prodi.html";
+  } else {
+    // URL tidak sesuai, tangani sesuai kebutuhan
+    console.error("URL tidak sesuai");
+    return;
   }
-});
+
+  // Redirect pengguna ke halaman yang sesuai
+  window.location.href = baseUrl + destinationUrl;
+}
+
+const simpelbiCard = CihuyQuerySelector(
+  ".portfolio-item a[href='https://euis.ulbi.ac.id/simpelbi']"
+);
+if (simpelbiCard) {
+  simpelbiCard.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
+    const baseUrl = "https://euis.ulbi.ac.id";
+
+    try {
+      const postData = {}; // Isi sesuai dengan data yang ingin Anda kirimkan
+
+      const result = await CihuyPostHeaders(apiUrlMenu, postData);
+      const dataUrl = result.data;
+
+      redirectToDashboard(baseUrl, dataUrl);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  });
+}
