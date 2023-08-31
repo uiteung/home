@@ -40,47 +40,39 @@ export function handleRtmClick(event) {
 
 //membuat get user
 
-function redirectToDashboard(url) {
-  window.location.href = url;
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const simpelbiCard = document.getElementById("simpelbiCard");
 
-const simpelbiCard = CihuyId("simpelbiCard");
+  if (simpelbiCard) {
+    simpelbiCard.addEventListener("click", async (event) => {
+      event.preventDefault();
 
-if (simpelbiCard) {
-  simpelbiCard.addEventListener("click", async (event) => {
-    event.preventDefault();
+      const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
+      const baseUrl = "https://euis.ulbi.ac.id";
 
-    const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
-    const baseUrl = "https://euis.ulbi.ac.id"; // Ganti dengan alamat dasar situs Anda
+      try {
+        let token = CihuyGetCookie("login");
+        const result = await CihuyPostHeaders(apiUrlMenu, token);
+        const dataUrl = result.data;
 
-    try {
-      const token = CihuyGetCookie("login");
-      const result = await CihuyPostHeaders(apiUrlMenu, token);
-      const data = JSON.parse(result).data;
-      console.log("Data from API:", data);
+        let userRole = "";
+        if (dataUrl === "/admins") {
+          userRole = "admin";
+        } else if (dataUrl === "/fakultas") {
+          userRole = "fakultas";
+        } else if (dataUrl === "/prodi") {
+          userRole = "prodi";
+        } else if (dataUrl === "/auditors") {
+          userRole = "auditor";
+        } else {
+          console.error("URL tidak sesuai");
+          return;
+        }
 
-      const role = data.replace("/", ""); // Menghapus karakter "/" di awal string
-
-      let destinationUrl = "";
-      if (role === "admins") {
-        destinationUrl = "/dashboard.html";
-      } else if (role === "fakultas") {
-        destinationUrl = "/dashboard-fakultas.html";
-      } else if (role === "prodi") {
-        destinationUrl = "/dashboard-prodi.html";
-      } else if (role === "auditors") {
-        destinationUrl = "/dashboard-auditor.html";
-      } else {
-        console.error("Role tidak sesuai");
-        return;
+        redirectToDashboard(baseUrl, dataUrl, userRole);
+      } catch (error) {
+        console.error("Error:", error);
       }
-
-      const fullUrl = `${baseUrl}/simpelbi/${role}${destinationUrl}`;
-      console.log("Full URL:", fullUrl);
-
-      redirectToDashboard(fullUrl);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  });
-}
+    });
+  }
+});
