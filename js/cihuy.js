@@ -38,6 +38,8 @@ export function handleRtmClick(event) {
 
 //membuat get user
 const apiUrlMenu = "https://simbe-dev.ulbi.ac.id/api/v1/menu/";
+let token = CihuyGetCookie("login");
+
 CihuyPostHeaders(apiUrlMenu, token)
   .then((result) => {
     console.log(result);
