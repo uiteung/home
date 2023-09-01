@@ -64,16 +64,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (
           responseData.code === 400 &&
           responseData.success === false &&
-          responseData.status === "Data user level tidak ditemukan"
+          responseData.status === "Data user level tidak ditemukan" &&
+          responseData.data === null
         ) {
-          targetPage = "maaf.html";
+          window.location.assign = "https://euis.ulbi.ac.id/simpelbi/404.html";
+          return;
         } else if (dataUrl === "/admins") {
           targetPage = "dashboard.html";
         } else if (dataUrl === "/prodi") {
-          targetPage = "adashboard-prodi.html";
+          targetPage = "dashboard-prodi.html";
         } else if (dataUrl === "/fakultas") {
           targetPage = "dashboard-fakultas.html";
-        } else if (dataUrl === "/auditor") {
+        } else if (dataUrl === "/auditors") {
           targetPage = "dashboard-auditor.html";
         } else {
           console.error("URL tidak sesuai");
