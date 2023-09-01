@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (dataUrl === "/auditors") {
           targetPage = "dashboard-auditor.html";
         } else {
+          targetPage = "404.html";
           console.error("URL tidak sesuai");
           return;
         }
