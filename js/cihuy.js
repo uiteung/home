@@ -37,7 +37,7 @@ export function handleRtmClick(event) {
   }
 }
 
-//membuat get user
+//membuat get user dashboard berdasarkan respons
 document.addEventListener("DOMContentLoaded", () => {
   const simpelbiCard = document.getElementById("simpelbiCard");
 
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Konstruksi URL akhir
-        const finalUrl = `https://euis.ulbi.ac.id/simpelbi/app/${dataUrl}/${targetPage}`;
+        const finalUrl = `https://euis.ulbi.ac.id/simpelbi/app${dataUrl}/${targetPage}`;
 
         // Arahkan pengguna ke URL akhir
         window.location.href = finalUrl;
