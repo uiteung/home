@@ -77,7 +77,15 @@ document.addEventListener("DOMContentLoaded", () => {
           targetPage = "dashboard-fakultas.html";
         } else if (dataUrl === "/auditors") {
           targetPage = "dashboard-auditor.html";
+        } else if(
+          responseData.code === 401 &&
+          responseData.success === false &&
+          responseData.status === "Unauthorize Token" &&
+          responseData.data === null
+        ){
+          targetPage = "404.html";
         } else {
+          targetPage = "404.html";
           console.error("URL tidak sesuai");
           return;
         }
