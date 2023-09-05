@@ -68,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
           responseData.data === null
         ) {
           window.location.assign = "https://euis.ulbi.ac.id/simpelbi/404.html";
-          return;
         } else if (dataUrl === "/admins") {
           targetPage = "dashboard.html";
         } else if (dataUrl === "/prodi") {
@@ -77,12 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
           targetPage = "dashboard-fakultas.html";
         } else if (dataUrl === "/auditors") {
           targetPage = "dashboard-auditor.html";
-        } else if(
+        } else if (
           responseData.code === 401 &&
           responseData.success === false &&
           responseData.status === "Unauthorize Token" &&
           responseData.data === null
-        ){
+        ) {
           targetPage = "404.html";
         } else {
           targetPage = "404.html";
