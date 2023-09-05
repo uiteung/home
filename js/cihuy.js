@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Konstruksi URL akhir
-        const finalUrl = `https://euis.ulbi.ac.id/simpelbi/app${dataUrl}/${targetPage}`;
+        const finalUrl = `https://euis.ulbi.ac.id/simpelbi${dataUrl}/${targetPage}`;
 
         // Arahkan pengguna ke URL akhir
         window.location.href = finalUrl;
