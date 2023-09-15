@@ -57,7 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const responseData = JSON.parse(postResult);
 
         // Dapatkan data URL dari respons
-        const dataUrl = responseData.data;
+        const dataUrl = responseData.data; 
+
+        //
 
         // Tentukan halaman tujuan berdasarkan data URL
         let targetPage = "";
