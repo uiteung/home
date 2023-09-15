@@ -1,6 +1,6 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
-import { CihuyPostHeaders } from "https://c-craftjs.github.io/api/api.js";
+import { CihuyGetHeaders } from "https://c-craftjs.github.io/api/api.js";
 import { CihuyQuerySelector } from "https://c-craftjs.github.io/element/element.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let token = CihuyGetCookie("login");
 
         // Lakukan permintaan POST
-        const postResult = await CihuyPostHeaders(postApiUrlMenu, token);
+        const postResult = await CihuyGetHeaders(postApiUrlMenu, token);
 
         // Parse respons JSON dari permintaan POST
         const responseData = JSON.parse(postResult);
