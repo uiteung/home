@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ) {
           window.location.assign = "https://euis.ulbi.ac.id/simpelbi/404.html";
         } else if (dataUrl === "/admins") {
-          targetPage = "dashboard.html";
+          targetPage = "dashboard-admins.html";
         } else if (dataUrl === "/prodi") {
           targetPage = "dashboard-prodi.html";
         } else if (dataUrl === "/fakultas") {
