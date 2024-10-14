@@ -1,5 +1,5 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
-// import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
+import { CihuyGetCookie } from "https://c-craftjs.github.io/cookies/cookies.js";
 import { CihuyGetHeaders } from "https://c-craftjs.github.io/api/api.js";
 import { CihuyQuerySelector } from "https://c-craftjs.github.io/element/element.js";
 
