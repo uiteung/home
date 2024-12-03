@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let rtmLink = document.getElementById("rtm");
 
   // Dapatkan nilai cookie "login"
-//   let token = CihuyGetCookie("login");
+  //   let token = CihuyGetCookie("login");
 
   // Tambahkan event listener untuk mengarahkan saat elemen diklik
   rtmLink.addEventListener("click", function (event) {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const responseData = JSON.parse(postResult);
 
         // Dapatkan data URL dari respons
-        const dataUrl = responseData.data; 
+        const dataUrl = responseData.data;
 
         //
 
@@ -101,4 +101,44 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+});
+
+// <----- Lulu ----->
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Fungsi untuk mengambil nilai cookie berdasarkan nama
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].split("=");
+      if (cookie[0] === name) {
+        return decodeURIComponent(cookie[1]);
+      }
+    }
+    return null; // Jika cookie tidak ditemukan
+  }
+
+  // Fungsi untuk handle klik pada link
+  function handleLinkClick(event) {
+    event.preventDefault(); // Cegah redirect default
+    const link = event.target.closest("a"); // Cari elemen <a> terdekat
+    if (!link) return; // Jika tidak ada elemen <a>, hentikan eksekusi
+
+    const accessToken = getCookie("peg_role"); // Ambil nilai cookie peg_role
+    if (accessToken === "peg") {
+      // Jika memiliki akses, redirect ke halaman tujuan
+      window.location.href = link.href; // Gunakan link.href
+    } else {
+      // Jika tidak memiliki akses, tampilkan pesan error
+      Swal.fire({
+        icon: "error",
+        title: "Access Denied",
+        text: "Mohon maaf, Anda tidak memiliki akses menuju halaman ini",
+      });
+    }
+  }
+
+  // Tambahkan event listener pada link
+  const luluCard = document.getElementById("luluCard");
+  luluCard.addEventListener("click", handleLinkClick);
 });
