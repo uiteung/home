@@ -124,8 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const link = event.target.closest("a"); // Cari elemen <a> terdekat
     if (!link) return; // Jika tidak ada elemen <a>, hentikan eksekusi
 
-    const accessToken = getCookie("set_role"); // Ambil nilai cookie peg_role
-    if (accessToken !== "mhs") {
+    const accessToken = getCookie("set_role") ? getCookie("set_role") : null; // Ambil nilai cookie peg_role
+    if (accessToken !== null) {
       // Jika memiliki akses, redirect ke halaman tujuan
       window.location.href = link.href; // Gunakan link.href
     } else {
