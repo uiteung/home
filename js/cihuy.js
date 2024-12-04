@@ -106,16 +106,20 @@ document.addEventListener("DOMContentLoaded", () => {
 // <----- Lulu ----->
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Fungsi untuk mengambil nilai cookie berdasarkan nama
+  // Fungsi untuk mendapatkan nilai cookie dan mendekripsinya
   function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].split("=");
-      if (cookie[0] === name) {
-        return decodeURIComponent(cookie[1]);
+    const key = "kecuali-mhs"; // Kunci harus sama dengan yang digunakan untuk enkripsi
+    const cookieArr = document.cookie.split(";");
+    for (let i = 0; i < cookieArr.length; i++) {
+      let cookiePair = cookieArr[i].trim();
+      if (cookiePair.startsWith(name + "=")) {
+        const encryptedValue = cookiePair.substring(name.length + 1);
+        const bytes = CryptoJS.AES.decrypt(encryptedValue, key);
+        const decryptedValue = bytes.toString(CryptoJS.enc.Utf8);
+        return decryptedValue;
       }
     }
-    return null; // Jika cookie tidak ditemukan
+    return null;
   }
 
   // Fungsi untuk handle klik pada link
@@ -124,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const link = event.target.closest("a"); // Cari elemen <a> terdekat
     if (!link) return; // Jika tidak ada elemen <a>, hentikan eksekusi
 
-    const accessToken = getCookie("set_role") ? getCookie("set_role") : null; // Ambil nilai cookie peg_role
+    const accessToken = getCookie("user_role") ? getCookie("user_role") : null; // Ambil nilai cookie peg_role
     if (accessToken !== null) {
       // Jika memiliki akses, redirect ke halaman tujuan
       window.location.href = link.href; // Gunakan link.href
