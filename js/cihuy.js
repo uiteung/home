@@ -105,44 +105,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // <----- Lulu ----->
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Fungsi untuk mendapatkan nilai cookie dan mendekripsinya
-  function getCookie(name) {
-    const key = "kecuali-mhs"; // Kunci harus sama dengan yang digunakan untuk enkripsi
-    const cookieArr = document.cookie.split(";");
-    for (let i = 0; i < cookieArr.length; i++) {
-      let cookiePair = cookieArr[i].trim();
-      if (cookiePair.startsWith(name + "=")) {
-        const encryptedValue = cookiePair.substring(name.length + 1);
-        const bytes = CryptoJS.AES.decrypt(encryptedValue, key);
-        const decryptedValue = bytes.toString(CryptoJS.enc.Utf8);
-        return decryptedValue;
-      }
-    }
-    return null;
-  }
+// document.addEventListener("DOMContentLoaded", () => {
+//   // Fungsi untuk mendapatkan nilai cookie dan mendekripsinya
+//   function getCookie(name) {
+//     const key = "kecuali-mhs"; // Kunci harus sama dengan yang digunakan untuk enkripsi
+//     const cookieArr = document.cookie.split(";");
+//     for (let i = 0; i < cookieArr.length; i++) {
+//       let cookiePair = cookieArr[i].trim();
+//       if (cookiePair.startsWith(name + "=")) {
+//         const encryptedValue = cookiePair.substring(name.length + 1);
+//         const bytes = CryptoJS.AES.decrypt(encryptedValue, key);
+//         const decryptedValue = bytes.toString(CryptoJS.enc.Utf8);
+//         return decryptedValue;
+//       }
+//     }
+//     return null;
+//   }
 
-  // Fungsi untuk handle klik pada link
-  function handleLinkClick(event) {
-    event.preventDefault(); // Cegah redirect default
-    const link = event.target.closest("a"); // Cari elemen <a> terdekat
-    if (!link) return; // Jika tidak ada elemen <a>, hentikan eksekusi
+//   // Fungsi untuk handle klik pada link
+//   function handleLinkClick(event) {
+//     event.preventDefault(); // Cegah redirect default
+//     const link = event.target.closest("a"); // Cari elemen <a> terdekat
+//     if (!link) return; // Jika tidak ada elemen <a>, hentikan eksekusi
 
-    const accessToken = getCookie("user_role") ? getCookie("user_role") : null; // Ambil nilai cookie peg_role
-    if (accessToken !== null) {
-      // Jika memiliki akses, redirect ke halaman tujuan
-      window.location.href = link.href; // Gunakan link.href
-    } else {
-      // Jika tidak memiliki akses, tampilkan pesan error
-      Swal.fire({
-        icon: "error",
-        title: "Access Denied",
-        text: "Mohon maaf, Anda tidak memiliki akses menuju halaman ini",
-      });
-    }
-  }
+//     const accessToken = getCookie("user_role") ? getCookie("user_role") : null; // Ambil nilai cookie peg_role
+//     if (accessToken !== null) {
+//       // Jika memiliki akses, redirect ke halaman tujuan
+//       window.location.href = link.href; // Gunakan link.href
+//     } else {
+//       // Jika tidak memiliki akses, tampilkan pesan error
+//       Swal.fire({
+//         icon: "error",
+//         title: "Access Denied",
+//         text: "Mohon maaf, Anda tidak memiliki akses menuju halaman ini",
+//       });
+//     }
+//   }
 
-  // Tambahkan event listener pada link
-  const luluCard = document.getElementById("luluCard");
-  luluCard.addEventListener("click", handleLinkClick);
-});
+//   // Tambahkan event listener pada link
+//   const luluCard = document.getElementById("luluCard");
+//   luluCard.addEventListener("click", handleLinkClick);
+// });
