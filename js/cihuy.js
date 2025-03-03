@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Dapatkan nilai cookie "login"
   let token = CihuyGetCookie("login");
-  let user_pbmp = CihuyGetCookie("useraes");
+  let user_pbmp = CihuyGetCookie("usraes");
 
   // Tambahkan event listener untuk mengarahkan saat elemen diklik
   rtmLink.addEventListener("click", function (event) {
