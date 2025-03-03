@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let rtmLink = document.getElementById("rtm");
 
   // Dapatkan nilai cookie "login"
-  //   let token = CihuyGetCookie("login");
+  let token = CihuyGetCookie("login");
 
   // Tambahkan event listener untuk mengarahkan saat elemen diklik
   rtmLink.addEventListener("click", function (event) {
@@ -16,26 +16,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (token) {
       // Buat URL baru dengan menambahkan parameter uuid (gunakan nilai token)
-      let newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${token}`;
+      // let newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${token}`;
+      let newUrl = `https://rtm.ulbi.ac.id/index.php/auth`;
 
       // Arahkan pengguna ke URL baru
-      window.location.assign(newUrl);
+      window.open(newUrl, "_blank");
     } else {
       console.log("Token tidak ditemukan dalam cookie.");
     }
   });
 });
 
-export function handleRtmClick(event) {
-  event.preventDefault();
+// export function handleRtmClick(event) {
+//   event.preventDefault();
 
-  if (token) {
-    let newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${token}`;
-    window.location.assign(newUrl);
-  } else {
-    console.log("Token tidak ditemukan dalam cookie.");
-  }
-}
+//   if (token) {
+//     let newUrl = `https://rtm.ulbi.ac.id/index.php/auth?uuid=${token}`;
+//     window.location.assign(newUrl);
+//   } else {
+//     console.log("Token tidak ditemukan dalam cookie.");
+//   }
+// }
 
 //membuat get user dashboard berdasarkan respons
 document.addEventListener("DOMContentLoaded", () => {
@@ -101,6 +102,39 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+});
+
+//  PBMP AUTO LOGIN
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Dapatkan elemen dengan ID "rtm"
+  let rtmLink = document.getElementById("goto-pbmp");
+
+  // Dapatkan nilai cookie "login"
+  let token = CihuyGetCookie("login");
+  let user_pbmp = CihuyGetCookie("useraes");
+
+  // Tambahkan event listener untuk mengarahkan saat elemen diklik
+  rtmLink.addEventListener("click", function (event) {
+    event.preventDefault(); // Mencegah perilaku default tautan
+
+    if (token) {
+      let masaBerlaku = 1; // dalam hari
+
+      let date = new Date();
+      date.setTime(date.getTime() + masaBerlaku * 24 * 60 * 60 * 1000);
+      let expires = "expires=" + date.toUTCString();
+      let newUrl = `https://pbmp.ulbi.ac.id/`;
+
+      document.cookie = `pbmp-login=${token}; ${expires}; path=/; domain=.ulbi.ac.id; SameSite=None; Secure`;
+      document.cookie = `pbmp-user=${user_pbmp}; ${expires}; path=/; domain=.ulbi.ac.id; SameSite=None; Secure`;
+
+      // Arahkan pengguna ke URL baru
+      window.open(newUrl, "_blank");
+    } else {
+      console.log("Token tidak ditemukan dalam cookie.");
+    }
+  });
 });
 
 // <----- Lulu ----->
