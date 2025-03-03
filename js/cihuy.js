@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
   rtmLink.addEventListener("click", function (event) {
     event.preventDefault(); // Mencegah perilaku default tautan
 
-    if (token) {
+    if (token || user_pbmp) {
       let masaBerlaku = 1; // dalam hari
 
       let date = new Date();
@@ -126,8 +126,8 @@ document.addEventListener("DOMContentLoaded", function () {
       let expires = "expires=" + date.toUTCString();
       let newUrl = `https://pbmp.ulbi.ac.id/`;
 
-      document.cookie = `pbmp-login=${token}; ${expires}; path=/; domain=.ulbi.ac.id; SameSite=None; Secure`;
-      document.cookie = `pbmp-user=${user_pbmp}; ${expires}; path=/; domain=.ulbi.ac.id; SameSite=None; Secure`;
+      document.cookie = `pbmp-login=${token}; ${expires}; path=/`;
+      document.cookie = `pbmp-user=${user_pbmp}; ${expires}; path=/`;
 
       // Arahkan pengguna ke URL baru
       window.open(newUrl, "_blank");
