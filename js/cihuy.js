@@ -27,6 +27,53 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Dapatkan elemen dengan ID "rtm"
+  let rtmLink = document.getElementById("hris");
+
+  // Dapatkan nilai cookie "login"
+  let token = CihuyGetCookie("login");
+
+  // Tambahkan event listener untuk mengarahkan saat elemen diklik
+  rtmLink.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    if (token) {
+      let roles;
+      let userURL =
+        "https://euis.ulbi.ac.id/hris-dev/app/history-slip-gaji-bulanan.html";
+      let AdminURL = "https://euis.ulbi.ac.id/hris-dev/app/master-data.html";
+      fetch(`https://hris_backend.ulbi.ac.id/api/v2/login/role`, {
+        method: "GET",
+        headers: {
+          login: token, // Gunakan Authorization Header yang benar
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          roles = data.data;
+          if (roles === "user") {
+            window.open(userURL, "_blank");
+          } else {
+            window.open(AdminURL, "_blank");
+          }
+          localStorage.setItem("roleHRIS", JSON.stringify(roles));
+        })
+        .catch((error) =>
+          console.error("Error fetching User Attributes:", error)
+        );
+    } else {
+      console.log("Token tidak ditemukan dalam cookie.");
+    }
+  });
+});
+
 // export function handleRtmClick(event) {
 //   event.preventDefault();
 
