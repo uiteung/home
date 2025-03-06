@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
           return response.json();
         })
         .then((data) => {
-          roles = data.data;
+          roles = data.data.role;
           if (roles === "user") {
             window.open(userURL, "_blank");
           } else {
