@@ -66,40 +66,40 @@ h6,
 
 
 /*** Button ***/
-.btn {
-    font-weight: 500;
-    transition: .5s;
-}
+/*.btn {*/
+/*    font-weight: 500;*/
+/*    transition: .5s;*/
+/*}*/
 
-.btn:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
-}
+/*.btn:hover {*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, .5);*/
+/*}*/
 
-.btn-square {
-    width: 38px;
-    height: 38px;
-}
+/*.btn-square {*/
+/*    width: 38px;*/
+/*    height: 38px;*/
+/*}*/
 
-.btn-sm-square {
-    width: 32px;
-    height: 32px;
-}
+/*.btn-sm-square {*/
+/*    width: 32px;*/
+/*    height: 32px;*/
+/*}*/
 
-.btn-lg-square {
-    width: 48px;
-    height: 48px;
-}
+/*.btn-lg-square {*/
+/*    width: 48px;*/
+/*    height: 48px;*/
+/*}*/
 
-.btn-square,
-.btn-sm-square,
-.btn-lg-square {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: normal;
-    border-radius: 50px;
-}
+/*.btn-square,*/
+/*.btn-sm-square,*/
+/*.btn-lg-square {*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    font-weight: normal;*/
+/*    border-radius: 50px;*/
+/*}*/
 
 
 /*** Navbar ***/
