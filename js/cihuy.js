@@ -39,10 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
 
     if (token) {
-      let masaBerlaku = 1; // dalam hari
+      let masaBerlakuJam = 2; // 2 jam
 
       let date = new Date();
-      date.setTime(date.getTime() + masaBerlaku * 24 * 60 * 60 * 1000);
+      date.setTime(date.getTime() + masaBerlakuJam * 60 * 60 * 1000);
       let expires = "expires=" + date.toUTCString();
       let newUrl = `https://repo.ulbi.ac.id/`;
 
@@ -197,10 +197,10 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault(); // Mencegah perilaku default tautan
 
     if (token || user_pbmp) {
-      let masaBerlaku = 1; // dalam hari
+      let masaBerlakuJam = 2; // 2 jam
 
       let date = new Date();
-      date.setTime(date.getTime() + masaBerlaku * 24 * 60 * 60 * 1000);
+      date.setTime(date.getTime() + masaBerlakuJam * 60 * 60 * 1000);
       let expires = "expires=" + date.toUTCString();
       let newUrl = `https://pbmp.ulbi.ac.id/`;
 
