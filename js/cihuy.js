@@ -29,6 +29,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   // Dapatkan elemen dengan ID "rtm"
+  let rtmLink = document.getElementById("repo");
+
+  // Dapatkan nilai cookie "login"
+  let token = CihuyGetCookie("login");
+
+  // Tambahkan event listener untuk mengarahkan saat elemen diklik
+  rtmLink.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    if (token) {
+      let masaBerlaku = 1; // dalam hari
+
+      let date = new Date();
+      date.setTime(date.getTime() + masaBerlaku * 24 * 60 * 60 * 1000);
+      let expires = "expires=" + date.toUTCString();
+      let newUrl = `https://repo.ulbi.ac.id/`;
+
+      document.cookie = `login=${token}; ${expires}; path=/; domain=.ulbi.ac.id; SameSite=None; Secure`;
+
+
+      // Arahkan pengguna ke URL baru
+      window.location.assign(newUrl);
+    } else {
+      console.log("Token tidak ditemukan dalam cookie.");
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Dapatkan elemen dengan ID "rtm"
   let rtmLink = document.getElementById("hris");
 
   // Dapatkan nilai cookie "login"
@@ -160,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let token = CihuyGetCookie("login");
   let user_pbmp = CihuyGetCookie("usraes");
 
-  console.log(user_pbmp);
+  // console.log(user_pbmp);
 
   // Tambahkan event listener untuk mengarahkan saat elemen diklik
   rtmLink.addEventListener("click", function (event) {
