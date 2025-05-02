@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             data.forEach((item) => {
                 const tr = document.createElement("tr");
 
-                const tanggal = new Date(item.date);
+                const tanggal = new Date(item.tanggal_ditetapkan);
                 const formattedDate = tanggal.toLocaleDateString("id-ID", {
                     day: "2-digit",
                     month: "2-digit",
