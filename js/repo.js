@@ -33,9 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     day: "2-digit",
                     month: "2-digit",
                     year: "numeric",
-                }) + " " + tanggal.toLocaleTimeString("id-ID", {
-                    hour: "2-digit",
-                    minute: "2-digit",
                 });
 
                 tr.innerHTML = `<tr>
